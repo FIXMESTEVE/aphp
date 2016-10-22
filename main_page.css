@@ -1,0 +1,23 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#map {
+    display: center;
+    height: 100%;
+    width: 75%;
+    float: left;
+}
+
+#info_loc {
+    background: black;
+    width: 25%;
+    height: 100%;
+    float: right;
+}
