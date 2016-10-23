@@ -161,13 +161,25 @@ function myMap() {
 				infowindow.close();
 			}
 			
-			infowindow = new google.maps.InfoWindow({
-				content: "<p>"+this.details.nom+"</p>" +
+			if(this.waitTime >= 0 && marker.waitTime <= SMALL_WAIT_TIME){
+				c = "00B451";
+			}
+			else if(wait > SMALL_WAIT_TIME && wait <= MEDIUM_WAIT_TIME){
+				c = "C4B407";
+			}
+			else if (wait > MEDIUM_WAIT_TIME && wait <= LONG_WAIT_TIME){
+				c = "FF9933";
+			}
+			else if (wait > LONG_WAIT_TIME){
+				c = "FF0000";
+			}
+			
+			infowindow = new google.maps.InfoWindow({				
+				content: "<p><b>"+this.details.nom+"</b></p>" +
 				"<p>"+this.details.adresse+"</p>" +
-				"<p>"+this.details.type+"</p>" +
-				"<p>"+this.details.publicc+"</p>" +
-				"<p>"+this.details.tel+"</p>" +
-				"<p>Temps d'attente : "+this.waitTime+ " minutes</p>"
+				"<p>"+this.details.type+" - "+this.details.publicc+"</p>" +
+				"<p><u>"+this.details.tel+"</u></p>" +
+				"<p><b><font color="+c+">Temps d'attente : "+this.waitTime+ " minutes</font></b></p>"
 			  });
 			infowindow.open(map, this);
 		});
