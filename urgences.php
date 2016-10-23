@@ -104,7 +104,7 @@
 			</div>
 			
 			<div id="map" style="width: 55%; height: 99%; margin: 0; display: inline-block; vertical-align: text-top;"></div>
-			<!-- api_key=AIzaSyANMowT_Qg8arsSvXpNtVueE4edDOsdUsM& -->
+			<!-- api_key=AIzaSyCY69LnmSclI6IJ73Q1QHEI7CXgPDB_bbE -->
 			
 			<div style="width:18%; margin: 2px 5px 2em 10px; display: inline-block; vertical-align: text-top; background-color: #F5F5F5; padding-left:10px; padding-right:10px;">
 			
@@ -243,7 +243,7 @@
 			</div>
 
 			<script src="main_js.js"></script>
-			<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?callback=myMap&key=AIzaSyCY69LnmSclI6IJ73Q1QHEI7CXgPDB_bbE"></script>
 			
 		</div>
 	</body>

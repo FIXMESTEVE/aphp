@@ -143,6 +143,10 @@ function myMap() {
 		}
 		console.log(c);
 		
+		if(!c){
+			c = "00B451";
+		}
+
 		var marker = new google.maps.Marker({
 			icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + c,
 			position: loc_array[i],
@@ -167,7 +171,8 @@ function myMap() {
 				"<p>"+this.details.type+"</p>" +
 				"<p>"+this.details.publicc+"</p>" +
 				"<p>"+this.details.tel+"</p>" +
-				"<p>Temps d'attente : "+this.waitTime+ " minutes</p>"
+				"<p>Temps d'attente : "+this.waitTime+ " minutes</p>" + 
+				"<a href=\"plan.jpg\" target=\"_blank\">Voir le plan</a>"
 			  });
 			infowindow.open(map, this);
 		});
