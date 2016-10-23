@@ -60,15 +60,15 @@
 						
 						<input type="submit" id="buttonSubmit" name="submit" value="Envoyer">
 						<input type="reset" name="reset" value=" Annuler ">
-						<a href="liste.php" target="droite"> <input type="button" value="Afficher tous les services d'urgences"> </a>
+						<a href="urgences.php" target="droite"> <input type="button" value="Afficher tous les services d'urgences"> </a>
 					</fieldset>
 				</form>
 			</div>
 			
-			<div id="map" style="width: 50%; height: 100%; margin: 0; display: inline-block; vertical-align: text-top;"></div>
+			<div id="map" style="width: 54%; height: 100%; margin: 0; display: inline-block; vertical-align: text-top;"></div>
 			<!-- api_key=AIzaSyANMowT_Qg8arsSvXpNtVueE4edDOsdUsM& -->
 			
-			<div id="hospitalsList" style="width: 24%; margin: 0; display: inline-block; vertical-align: text-top;">
+			<div id="hospitalsList" style="width: 20%; margin: 0; display: inline-block; vertical-align: text-top;">
 			
 				<?php
 				
@@ -122,7 +122,44 @@
 				// Fermeture du curseur d'analyse des résultats
 				$resultat-> closeCursor();
 				
-				} else {};
+				} else {
+					try{
+						$bdd = new PDO(
+						'mysql:host=localhost;dbname=aphp', 'root', '',
+						array(PDO::ATTR_ERRMODE =>
+						PDO::ERRMODE_EXCEPTION));
+					}
+					catch(Exception $e) {
+						die('Erreur :'.$e->getMessage());
+					};	
+				
+					// Encodage en UTF-8
+
+					$bdd->query('set character_set_client=utf8');
+					$bdd->query('set character_set_connection=utf8');
+					$bdd->query('set character_set_results=utf8');
+					$bdd->query('set character_set_server=utf8');
+					
+					// Définition de la requête
+					
+					$requete = "SELECT med_ge_nom, med_ge_prenom, med_ge_adresse, med_ge_tel, med_ge_latitude, med_ge_longitude FROM tab_med_ge ";
+					
+					// Soumission de la reqête
+					$resultat=$bdd->query($requete);
+					
+					
+					// Récupération des données de la requête ligne à ligne
+					echo "<table border=1 width=100% style=\"padding:10px 10px\";><tr><td align=\"center\">Médecins Généralistes</td><td align=\"center\">Permanance d'accès au sois</td></tr></table><br />";
+					while ($donnees = $resultat->fetch()){
+						echo "Dr ".$donnees['med_ge_nom']." ".$donnees['med_ge_prenom']."<br />";
+						echo $donnees['med_ge_adresse']."<br />";
+						echo $donnees['med_ge_tel']."<br /><hr />";
+					}
+					
+					// Fermeture du curseur d'analyse des résultats
+					$resultat-> closeCursor();
+					
+				};
 			?>
 			</div>
 			<script src="main_js.js"></script>

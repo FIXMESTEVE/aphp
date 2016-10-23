@@ -1,7 +1,7 @@
 var hospitals;
 
 //ajax shit here
-$.get( "./hospitals.php", function( data ) {
+$.post( "./hospitals.php", {}).done(function( data ) {
   console.dir(data);
 });
 
