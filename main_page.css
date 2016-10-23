@@ -29,6 +29,13 @@ h1{
 	margin-left: 20px;
 }
 
+#button{
+	width: 450px;
+	height: 70px;
+	text-align: center;
+	font-size: 24px;
+   }
+
 #blabla {
     border: 2px solid red;
 	padding: 5px;
