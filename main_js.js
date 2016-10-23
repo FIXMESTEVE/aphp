@@ -188,7 +188,7 @@ function myMap() {
 				"<p>"+this.details.adresse+"</p>" +
 				"<p>"+this.details.type+" - "+this.details.publicc+"</p>" +
 				"<p><u>"+this.details.tel+"</u></p>" +
-				"<p><b><font color="+c+">Temps d'attente : "+this.waitTime+ " minutes</font></b></p>"
+				"<p><b><font color="+c+">Temps d'attente : "+this.waitTime+ " minutes</font></b></p>" +
 				"<a href=\"plan.jpg\" target=\"_blank\">Voir le plan</a>"
 			  });
 			infowindow.open(map, this);
