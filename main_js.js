@@ -83,7 +83,7 @@ function myMap() {
 	var pinImage = {
 		url: "./map_marker.png",
 		size: new google.maps.Size(300, 300),
-		origin: new google.maps.Point(15, 15),
+		origin: new google.maps.Point(0, 0),
 		anchor: new google.maps.Point(0, 0),
 		scaledSize: new google.maps.Size(25, 25)	
 	}
@@ -103,9 +103,9 @@ function myMap() {
 		})
 	};
 
-    var wait = getRandomInt(0, 90); //generate random wait time (in minutes)
-
+    
     for (i = 0; i < loc_array.length; ++i) {
+		var wait = getRandomInt(0, 90); //generate random wait time (in minutes)
 
 		//change marker color
 		var c;
@@ -121,11 +121,12 @@ function myMap() {
 		else if (wait > LONG_WAIT_TIME){
 			c = "CC0000";
 		}
+		console.log(c);
 
 		var marker = new google.maps.Marker({
+			icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + c,
 			position: loc_array[i],
-			map: map,
-			color: c
+			map: map
 		});
 		marker.details = details_array[i];
 		marker.waitTime = wait;
@@ -145,7 +146,8 @@ function myMap() {
 				"<p>"+this.details.adresse+"</p>" +
 				"<p>"+this.details.type+"</p>" +
 				"<p>"+this.details.publicc+"</p>" +
-				"<p>"+this.details.tel+"</p>"
+				"<p>"+this.details.tel+"</p>" +
+				"<p>Temps d'attente : "+this.waitTime+ " minutes</p>"
 			  });
 			infowindow.open(map, this);
 		});
