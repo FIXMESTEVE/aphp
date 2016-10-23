@@ -82,8 +82,12 @@ var loc_array_geoloc = [
 
 var map;
 var infowindow = null;
+var directionsDisplay;
+var directionsService;
 
 function myMap() {
+	directionsService = new google.maps.DirectionsService;
+	directionsDisplay = new google.maps.DirectionsRenderer;
 	var pinImage = {
 		url: "./map_marker.png",
 		size: new google.maps.Size(300, 300),
@@ -107,6 +111,7 @@ function myMap() {
     }
     map = new google.maps.Map(mapCanvas, mapOptions);
 	
+	directionsDisplay.setMap(map);
 	for (i = 0; i < loc_array_med_ge.length; ++i) {
 		var marker = new google.maps.Marker({
 			position: loc_array_med_ge[i],
@@ -182,6 +187,17 @@ function myMap() {
 				"<p><b><font color="+c+">Temps d'attente : "+this.waitTime+ " minutes</font></b></p>"
 			  });
 			infowindow.open(map, this);
+			directionsService.route({
+				origin: new google.maps.LatLng(48.858775, 2.37136),
+				destination: marker.position,
+				travelMode: google.maps.TravelMode.WALKING
+			}, function(response, status) {
+				if (status === google.maps.DirectionsStatus.OK) {
+					directionsDisplay.setDirections(response);
+				} else {
+				window.alert('Directions request failed due to ' + status);
+				}
+			});
 		});
     }
 }
