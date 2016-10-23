@@ -43,9 +43,9 @@ $(document).ready(function(){
 		}
 	}
  */
-var SMALL_WAIT_TIME = 30;
+var SMALL_WAIT_TIME = 20;
 var MEDIUM_WAIT_TIME = 45;
-var LONG_WAIT_TIME = 60;
+var LONG_WAIT_TIME = 70;
 
 var loc_array = [];
 var details_array=[];
@@ -76,6 +76,10 @@ var loc_array_med_ge = [
     {lat: 48.873047, lng: 2.362591}
 ];
 
+var loc_array_geoloc = [
+    {lat: 48.858775, lng: 2.37136}
+];
+
 var map;
 var infowindow = null;
 
@@ -85,13 +89,21 @@ function myMap() {
 		size: new google.maps.Size(300, 300),
 		origin: new google.maps.Point(0, 0),
 		anchor: new google.maps.Point(0, 0),
-		scaledSize: new google.maps.Size(25, 25)	
+		scaledSize: new google.maps.Size(18, 18)	
+	}
+	
+	var geolocImage = {
+		url: "./map_geoloc.png",
+		size: new google.maps.Size(300, 300),
+		origin: new google.maps.Point(0, 0),
+		anchor: new google.maps.Point(0, 0),
+		scaledSize: new google.maps.Size(50, 50)	
 	}
 	
     var mapCanvas = document.getElementById("map");
     var mapOptions = {
-		center: new google.maps.LatLng(48.856614, 2.352222),
-		zoom: 12
+		center: new google.maps.LatLng(48.858775, 2.37136),
+		zoom: 13
     }
     map = new google.maps.Map(mapCanvas, mapOptions);
 	
@@ -102,6 +114,14 @@ function myMap() {
 			icon: pinImage
 		})
 	};
+	
+	for (i = 0; i < loc_array_geoloc.length; ++i) {
+		var marker = new google.maps.Marker({
+			position: loc_array_geoloc[i],
+			map: map,
+			icon: geolocImage
+		})
+	};
 
     
     for (i = 0; i < loc_array.length; ++i) {
@@ -110,19 +130,19 @@ function myMap() {
 		//change marker color
 		var c;
 		if(wait >= 0 && marker.waitTime <= SMALL_WAIT_TIME){
-			c = "00FA9A";
+			c = "00B451";
 		}
 		else if(wait > SMALL_WAIT_TIME && wait <= MEDIUM_WAIT_TIME){
-			c = "FFD700";
+			c = "FFD937";
 		}
 		else if (wait > MEDIUM_WAIT_TIME && wait <= LONG_WAIT_TIME){
-			c = "FF7316";
+			c = "FF9933";
 		}
 		else if (wait > LONG_WAIT_TIME){
-			c = "CC0000";
+			c = "FF0000";
 		}
 		console.log(c);
-
+		
 		var marker = new google.maps.Marker({
 			icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + c,
 			position: loc_array[i],
