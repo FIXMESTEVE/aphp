@@ -43,8 +43,9 @@ $(document).ready(function(){
 		}
 	}
  */
-
-console.log("lol");
+var SMALL_WAIT_TIME = 30;
+var MEDIUM_WAIT_TIME = 45;
+var LONG_WAIT_TIME = 60;
 
 var loc_array = [];
 var details_array=[]
@@ -65,19 +66,37 @@ var infowindow = null;
 function myMap() {
     var mapCanvas = document.getElementById("map");
     var mapOptions = {
-	center: new google.maps.LatLng(48.856614, 2.352222),
-	zoom: 12
+		center: new google.maps.LatLng(48.856614, 2.352222),
+		zoom: 12
     }
     map = new google.maps.Map(mapCanvas, mapOptions);
 	
-
+    var wait = getRandomInt(0, 90); //generate random wait time (in minutes)
     for (i = 0; i < loc_array.length; ++i) {
+
+		//change marker color
+		var c;
+		if(wait >= 0 && marker.waitTime <= SMALL_WAIT_TIME){
+			c = "00FA9A";
+		}
+		else if(wait > SMALL_WAIT_TIME && wait <= MEDIUM_WAIT_TIME){
+			c = "FFD700";
+		}
+		else if (wait > MEDIUM_WAIT_TIME && wait <= LONG_WAIT_TIME){
+			c = "FF7316";
+		}
+		else if (wait > LONG_WAIT_TIME){
+			c = "CC0000";
+		}
+
 		var marker = new google.maps.Marker({
 			position: loc_array[i],
 			map: map,
+			color: c
 		});
 		marker.details = details_array[i];
-		
+		marker.waitTime = wait;
+
 		console.dir(marker.position);
 		
 		
@@ -98,6 +117,11 @@ function myMap() {
 			infowindow.open(map, this);
 		});
     }
-	
+}
+
+
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
