@@ -1,7 +1,11 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<script src="main_js.js"></script>
+		<script
+			  src="https://code.jquery.com/jquery-3.1.1.js"
+			  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+			  crossorigin="anonymous"></script>
+		
 	</head>
 	
 	<body>
@@ -63,9 +67,8 @@
 			
 			<div id="map" style="width: 50%; height: 100%; margin: 0; display: inline-block; vertical-align: text-top;"></div>
 			<!-- api_key=AIzaSyANMowT_Qg8arsSvXpNtVueE4edDOsdUsM& -->
-			<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 			
-			<div style="width: 24%; margin: 0; display: inline-block; vertical-align: text-top;">
+			<div id="hospitalsList" style="width: 24%; margin: 0; display: inline-block; vertical-align: text-top;">
 			
 				<?php
 				
@@ -113,7 +116,7 @@
 				
 				
 				// Récupération des données de la requête ligne à ligne
-				$results=$resultat->fetchAll(PDO::FETCH_ASSOC);
+				$results=$resultat->fetchAll();
 				echo json_encode($results);
 				
 				// Fermeture du curseur d'analyse des résultats
@@ -122,6 +125,9 @@
 				} else {};
 			?>
 			</div>
+			<script src="main_js.js"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
+			
 		</div>
 	</body>
 </html>
